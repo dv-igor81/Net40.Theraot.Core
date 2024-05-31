@@ -1,0 +1,40 @@
+Знакомство с XAML
+В 2006 году Microsoft выпустила Windows Presentation Foundation (WPF), которая стала первой технологией, использующей 
+XAML (eXtensible Application Markup Language, расширяемый язык разметки приложений). Вскоре после этого была разработана 
+технология Silverlight для веб- и мобильных приложений, но она больше не поддерживается Microsoft. WPF до настоящего 
+времени используется для создания настольных приложений Windows; в качестве примера можно привести Visual Studio для 
+Windows.
+XAML можно использовать для создания частей таких приложений, как:
+ - приложения .NET MAUI для мобильных и настольных устройств, включая Android, iOS, Windows и macOS. 
+Они являются продуктом развития технологии Xamarin.Forms;
+ - приложения WinUI 3 для устройств с Windows 10 и 11.
+ - приложения Universal Windows Platform (UWP) для устройств с Windows 10 и 11, Xbox One и Mixed Reality;
+ - WPF-приложения для рабочего стола Windows, включая версии Windows 7 и более поздние;
+ - приложения Avalonia и Uno Platform, использующие кросс-платформенные технологии сторонних производителей.
+Упрощение кода с помощью XAML
+XAML упрощает код C#, особенно при создании пользовательского интерфейса.
+Представьте, что для создания панели инструментов вам необходимо добавить две или более кнопки, расположенные 
+горизонтально. В C# вы можете написать следующий код:
+StackPanel toolbar = new();
+toolbar.Orientation = Orientation.Horizontal;
+Button newButton = new();
+newButton.Content = "New";
+newButton.Background = new SolidColorBrush(Colors.Pink);
+toolbar.Children.Add(newButton);
+Button openButton = new();
+openButton.Content = "Open";
+openButton.Background = new SolidColorBrush(Colors.Pink);
+toolbar.Children.Add(openButton);
+
+В XAML данный код можно упростить. В процессе обработки этого XAML устанавливаются эквивалентные свойства и вызываются 
+методы для достижения той же цели, которая стояла перед кодом C#:
+<StackPanel Name="toolbar" Orientation="Horizontal">
+<Button Name="newButton" Background="Pink">New</Button>
+<Button Name="openButton" Background="Pink">Open</Button>
+</StackPanel>
+Вы можете рассматривать XAML как альтернативный и более легкий способ объявления и создания экземпляров типов .NET, 
+особенно при определении пользовательского интерфейса и ресурсов, которые он использует.
+XAML позволяет объявлять ресурсы, такие как кисти, стили и темы, на разных уровнях, например на уровне элемента UI, 
+страницы или глобально для приложения, чтобы обеспечить совместное использование ресурсов.
+XAML также позволяет выполнять привязку данных между элементами пользовательского интерфейса или между элементами UI 
+и объектами и коллекциями.

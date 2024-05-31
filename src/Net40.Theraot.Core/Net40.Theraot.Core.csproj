@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props"
+            Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')"/>
+    <PropertyGroup>
+        <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+        <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+        <ProjectGuid>{868D7589-87B6-47AD-8CC6-E4F856199FF2}</ProjectGuid>
+        <OutputType>Library</OutputType>
+        <AppDesignerFolder>Properties</AppDesignerFolder>
+        <RootNamespace>Net40.Theraot.Core</RootNamespace>
+        <AssemblyName>Net40.Theraot.Core</AssemblyName>
+        <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+        <FileAlignment>512</FileAlignment>
+        <LangVersion>11</LangVersion>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugSymbols>true</DebugSymbols>
+        <DebugType>full</DebugType>
+        <Optimize>false</Optimize>
+        <OutputPath>bin\Debug\</OutputPath>
+        <DefineConstants>DEBUG;TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <PlatformTarget>AnyCPU</PlatformTarget>
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <OutputPath>bin\Release\</OutputPath>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    </PropertyGroup>
+    <ItemGroup>
+        <Reference Include="System"/>
+        <Reference Include="System.Core"/>
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="System.Collections.Generic\CollectionExtensions.cs" />
+        <Compile Include="System.Collections.Generic\DictionaryEx.cs" />
+        <Compile Include="System.Collections.Generic\HashSetEx.cs" />
+        <Compile Include="System.Collections.Generic\IAsyncEnumerable.cs" />
+        <Compile Include="System.Collections.Generic\IAsyncEnumerator.cs" />
+        <Compile Include="System.Collections.Generic\IReadOnlyCollection.cs" />
+        <Compile Include="System.Collections.Generic\IReadOnlyDictionary.cs" />
+        <Compile Include="System.Collections.Generic\IReadOnlyList.cs" />
+        <Compile Include="System.Collections.Generic\IReadOnlySet.cs" />
+        <Compile Include="System.Collections.Generic\ListEx.cs" />
+        <Compile Include="System.Collections.ObjectModel\ReadOnlyCollectionEx.cs" />
+        <Compile Include="System.Collections.ObjectModel\ReadOnlyDictionary.cs" />
+        <Compile Include="System.Diagnostics.CodeAnalysis\AllowNullAttribute.cs" />
+        <Compile Include="System.Diagnostics.CodeAnalysis\DoesNotReturnAttribute.cs" />
+        <Compile Include="System.Diagnostics.CodeAnalysis\MaybeNullAttribute.cs" />
+        <Compile Include="System.Diagnostics.CodeAnalysis\MaybeNullWhenAttribute.cs" />
+        <Compile Include="System.Diagnostics.CodeAnalysis\NotNullAttribute.cs" />
+        <Compile Include="System.Diagnostics.CodeAnalysis\NotNullIfNotNullAttribute.cs" />
+        <Compile Include="System.Diagnostics.CodeAnalysis\NotNullWhenAttribute.cs" />
+        <Compile Include="System.Diagnostics\DebugEx.cs" />
+        <Compile Include="System.Diagnostics\StackTraceHiddenAttribute.cs" />
+        <Compile Include="System.IO\PathEx.cs" />
+        <Compile Include="System.IO\PathInternalEx.cs" />
+        <Compile Include="System.IO\StreamTheraotExtensions.cs" />
+        <Compile Include="System.Reflection\AssemblyExtraExtensions.cs" />
+        <Compile Include="System.Reflection\CustomAttributeExtensions.cs" />
+        <Compile Include="System.Reflection\IntrospectionExtensions.cs" />
+        <Compile Include="System.Reflection\IReflectableType.cs" />
+        <Compile Include="System.Reflection\MethodInfoTheraotExtensions.cs" />
+        <Compile Include="System.Reflection\ParameterInfoTheraotExtensions.cs" />
+        <Compile Include="System.Reflection\PropertyInfoTheraotExtensions.cs" />
+        <Compile Include="System.Reflection\RuntimeReflectionExtensions.cs" />
+        <Compile Include="System.Reflection\TypeExtraExtensions.cs" />
+        <Compile Include="System.Reflection\TypeInfo.cs" />
+        <Compile Include="System.Runtime.CompilerServices\AsyncIteratorMethodBuilder.cs" />
+        <Compile Include="System.Runtime.CompilerServices\AsyncMethodBuilderAttribute.cs" />
+        <Compile Include="System.Runtime.CompilerServices\AsyncMethodBuilderCore.cs" />
+        <Compile Include="System.Runtime.CompilerServices\AsyncMethodTaskCache.cs" />
+        <Compile Include="System.Runtime.CompilerServices\AsyncTaskMethodBuilder.cs" />
+        <Compile Include="System.Runtime.CompilerServices\AsyncValueTaskMethodBuilder.cs" />
+        <Compile Include="System.Runtime.CompilerServices\AsyncVoidMethodBuilder.cs" />
+        <Compile Include="System.Runtime.CompilerServices\CallerMemberNameAttribute.cs" />
+        <Compile Include="System.Runtime.CompilerServices\ConfiguredTaskAwaitable.cs" />
+        <Compile Include="System.Runtime.CompilerServices\ConfiguredValueTaskAwaitable.cs" />
+        <Compile Include="System.Runtime.CompilerServices\FormattableStringFactory.cs" />
+        <Compile Include="System.Runtime.CompilerServices\IAsyncMethodBuilder.cs" />
+        <Compile Include="System.Runtime.CompilerServices\IAsyncStateMachine.cs" />
+        <Compile Include="System.Runtime.CompilerServices\ICriticalNotifyCompletion.cs" />
+        <Compile Include="System.Runtime.CompilerServices\INotifyCompletion.cs" />
+        <Compile Include="System.Runtime.CompilerServices\MethodImplOptionsEx.cs" />
+        <Compile Include="System.Runtime.CompilerServices\TaskAwaiter.cs" />
+        <Compile Include="System.Runtime.CompilerServices\ValueTaskAwaiter.cs" />
+        <Compile Include="System.Runtime.CompilerServices\YieldAwaitable.cs" />
+        <Compile Include="System.Runtime.ExceptionServices\ExceptionDispatchInfo.cs" />
+        <Compile Include="System.Runtime.Versioning\NonVersionableAttribute.cs" />
+        <Compile Include="System.Text\UnicodeDebug.cs" />
+        <Compile Include="System.Text\UnicodeUtility.cs" />
+        <Compile Include="System.Text\UTF8EncodingEx.cs" />
+        <Compile Include="System.Threading.Tasks.Sources\IValueTaskSource.cs" />
+        <Compile Include="System.Threading.Tasks.Sources\ManualResetValueTaskSourceCore.cs" />
+        <Compile Include="System.Threading.Tasks.Sources\ValueTaskSourceOnCompletedFlags.cs" />
+        <Compile Include="System.Threading.Tasks.Sources\ValueTaskSourceStatus.cs" />
+        <Compile Include="System.Threading.Tasks\TaskCompletionSourceTheraotExtensions.cs" />
+        <Compile Include="System.Threading.Tasks\TaskEx.cs" />
+        <Compile Include="System.Threading.Tasks\TaskExEx.cs" />
+        <Compile Include="System.Threading.Tasks\TaskTheraotExtensions.cs" />
+        <Compile Include="System.Threading.Tasks\ValueTask.cs" />
+        <Compile Include="System.Threading.Tasks\ValueTaskEx.cs" />
+        <Compile Include="System.Threading\CancellationTokenSourceTheraotExtensions.cs" />
+        <Compile Include="System.Threading\SemaphoreSlimTheraotExtensions.cs" />
+        <Compile Include="System.Threading\ThreadEx.cs" />
+        <Compile Include="System.Threading\ThreadPoolEx.cs" />
+        <Compile Include="System.Threading\Volatile.cs" />
+        <Compile Include="System\ArrayEx.cs" />
+        <Compile Include="System\ExceptionArgument.cs" />
+        <Compile Include="System\FormattableString.cs" />
+        <Compile Include="System\IAsyncDisposable.cs" />
+        <Compile Include="System\IProgress.cs" />
+        <Compile Include="System\StringEx.cs" />
+        <Compile Include="System\ThrowHelper.cs" />
+        <Compile Include="System\TypeEx.cs" />
+        <Compile Include="System\WeakReference.cs" />
+        <Compile Include="Theraot.Collections.Specialized\EnumerationList.cs" />
+        <Compile Include="Theraot.Collections.Specialized\IHasComparer.cs" />
+        <Compile Include="Theraot.Collections.Specialized\ProxyCollection.cs" />
+        <Compile Include="Theraot.Collections.ThreadSafe\ArrayReservoir.cs" />
+        <Compile Include="Theraot.Collections.ThreadSafe\Bucket.cs" />
+        <Compile Include="Theraot.Collections.ThreadSafe\BucketCore.cs" />
+        <Compile Include="Theraot.Collections.ThreadSafe\BucketHelper.cs" />
+        <Compile Include="Theraot.Collections.ThreadSafe\CacheDict.cs" />
+        <Compile Include="Theraot.Collections.ThreadSafe\DelegateCollectionInvokeOptions.cs" />
+        <Compile Include="Theraot.Collections.ThreadSafe\DoAction.cs" />
+        <Compile Include="Theraot.Collections.ThreadSafe\FixedSizeBucket.cs" />
+        <Compile Include="Theraot.Collections.ThreadSafe\FixedSizeQueue.cs" />
+        <Compile Include="Theraot.Collections.ThreadSafe\IBucket.cs" />
+        <Compile Include="Theraot.Collections.ThreadSafe\Node.cs" />
+        <Compile Include="Theraot.Collections.ThreadSafe\Pool.cs" />
+        <Compile Include="Theraot.Collections.ThreadSafe\StrongDelegateCollection.cs" />
+        <Compile Include="Theraot.Collections.ThreadSafe\ThreadSafeCollection.cs" />
+        <Compile Include="Theraot.Collections.ThreadSafe\ThreadSafeQueue.cs" />
+        <Compile Include="Theraot.Collections.ThreadSafe\WeakCollection.cs" />
+        <Compile Include="Theraot.Collections.ThreadSafe\WeakDelegateCollection.cs" />
+        <Compile Include="Theraot.Collections\CustomObserver.cs" />
+        <Compile Include="Theraot.Collections\EmptyCollection.cs" />
+        <Compile Include="Theraot.Collections\EmptySet.cs" />
+        <Compile Include="Theraot.Collections\Extensions.cs" />
+        <Compile Include="Theraot.Collections\IClosable.cs" />
+        <Compile Include="Theraot.Collections\IProgressive.cs" />
+        <Compile Include="Theraot.Collections\ObservableExtensions.cs" />
+        <Compile Include="Theraot.Collections\ProgressiveCollection.cs" />
+        <Compile Include="Theraot.Collections\ProgressiveSet.cs" />
+        <Compile Include="Theraot.Collections\Progressor.cs" />
+        <Compile Include="Theraot.Collections\ProgressorProxy.cs" />
+        <Compile Include="Theraot.Collections\ProxyObservable.cs" />
+        <Compile Include="Theraot.Collections\TryTake.cs" />
+        <Compile Include="Theraot.Core\ActionHelper.cs" />
+        <Compile Include="Theraot.Core\FuncHelper.cs" />
+        <Compile Include="Theraot.Core\NumericHelper.cs" />
+        <Compile Include="Theraot.Core\SequenceHelper.cs" />
+        <Compile Include="Theraot.Reflection\TypeHelper.cs" />
+        <Compile Include="Theraot.Threading.Needles\ExceptionStructNeedle.cs" />
+        <Compile Include="Theraot.Threading.Needles\ICacheNeedle.cs" />
+        <Compile Include="Theraot.Threading.Needles\INeedle.cs" />
+        <Compile Include="Theraot.Threading.Needles\IPromise.cs" />
+        <Compile Include="Theraot.Threading.Needles\IReadOnlyNeedle.cs" />
+        <Compile Include="Theraot.Threading.Needles\IRecyclable.cs" />
+        <Compile Include="Theraot.Threading.Needles\IWaitablePromise.cs" />
+        <Compile Include="Theraot.Threading.Needles\NeedleHelper.cs" />
+        <Compile Include="Theraot.Threading.Needles\Promise.cs" />
+        <Compile Include="Theraot.Threading.Needles\PromiseNeedle.cs" />
+        <Compile Include="Theraot.Threading.Needles\ReadOnlyPromise.cs" />
+        <Compile Include="Theraot.Threading.Needles\ReadOnlyPromiseNeedle.cs" />
+        <Compile Include="Theraot.Threading.Needles\ReadOnlyStructNeedle.cs" />
+        <Compile Include="Theraot.Threading.Needles\StructNeedle.cs" />
+        <Compile Include="Theraot.Threading.Needles\WeakDelegateNeedle.cs" />
+        <Compile Include="Theraot.Threading.Needles\WeakNeedle.cs" />
+        <Compile Include="Theraot.Threading\Disposable.cs" />
+        <Compile Include="Theraot.Threading\DisposableAkin.cs" />
+        <Compile Include="Theraot.Threading\GCMonitor.cs" />
+        <Compile Include="Theraot.Threading\NoOpDisposable.cs" />
+        <Compile Include="Theraot.Threading\ReentryGuard.cs" />
+        <Compile Include="Theraot.Threading\RootedTimeout.cs" />
+        <Compile Include="Theraot.Threading\RuntimeUniqueIdProvider.cs" />
+        <Compile Include="Theraot.Threading\ThreadingHelper.cs" />
+        <Compile Include="Theraot.Threading\ThreadUniqueId.cs" />
+        <Compile Include="Theraot.Threading\Timer.cs" />
+        <Compile Include="Theraot.Threading\UniqueId.cs" />
+        <Compile Include="Theraot\VoidStruct.cs" />
+    </ItemGroup>
+    <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
+    <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+         Other similar extension points exist, see Microsoft.Common.targets.
+    <Target Name="BeforeBuild">
+    </Target>
+    <Target Name="AfterBuild">
+    </Target>
+    -->
+
+</Project>
