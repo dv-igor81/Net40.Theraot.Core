@@ -106,7 +106,7 @@ public static class ThreadEx
 
 	[MethodImpl(MethodImplOptionsEx.AggressiveInlining)]
 	[return: NotNullIfNotNull("address")]
-	public static object? VolatileRead(ref object? address)
+	public static object VolatileRead(ref object address)
 	{
 		return Thread.VolatileRead(ref address);
 	}
@@ -203,7 +203,7 @@ public static class ThreadEx
 	}
 
 	[MethodImpl(MethodImplOptionsEx.AggressiveInlining)]
-	public static void VolatileWrite(ref object? address, object? value)
+	public static void VolatileWrite(ref object address, object value)
 	{
 		Thread.VolatileWrite(ref address, value);
 	}

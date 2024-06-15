@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace System.Runtime.CompilerServices;
 
-public readonly struct TaskAwaiter : ICriticalNotifyCompletion, INotifyCompletion
+public readonly struct TaskAwaiter : ICriticalNotifyCompletion
 {
 	private static readonly object[] _emptyParams = new object[0];
 
-	private static readonly MethodInfo? _prepForRemoting = GetPrepForRemotingMethodInfo();
+	private static readonly MethodInfo _prepForRemoting = GetPrepForRemotingMethodInfo();
 
 	private readonly Task _task;
 
@@ -69,7 +69,7 @@ public readonly struct TaskAwaiter : ICriticalNotifyCompletion, INotifyCompletio
 				}
 				catch (Exception exception)
 				{
-					System.Runtime.CompilerServices.AsyncMethodBuilderCore.ThrowOnContext(exception, null);
+					AsyncMethodBuilderCore.ThrowOnContext(exception, null);
 				}
 			}, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
 		}
@@ -79,7 +79,24 @@ public readonly struct TaskAwaiter : ICriticalNotifyCompletion, INotifyCompletio
 		}
 	}
 
-	internal static Exception? PrepareExceptionForRethrow(Exception? exc)
+	internal static Exception PrepareExceptionForRethrow(Exception exc)
+	{
+		if (_prepForRemoting == null)
+		{
+			return exc;
+		}
+		try
+		{
+			_prepForRemoting.Invoke(exc, _emptyParams);
+		}
+		catch (Exception)
+		{
+			// ignored
+		}
+		return exc;
+	}
+	
+	/*internal static Exception PrepareExceptionForRethrowTesting(Exception exc)
 	{
 		if (_prepForRemoting == null)
 		{
@@ -94,8 +111,13 @@ public readonly struct TaskAwaiter : ICriticalNotifyCompletion, INotifyCompletio
 			// ignored
 		}
 
+		// string t1 = exc.Message;
+		// string t2 = exc.StackTrace;
+		// string t3 = exc.Source;
+		// string t4 = exc.ToString();
+		//return exc.GetBaseException();
 		return exc;
-	}
+	}*/
 
 	internal static void ValidateEnd(Task task)
 	{
@@ -105,7 +127,7 @@ public readonly struct TaskAwaiter : ICriticalNotifyCompletion, INotifyCompletio
 		}
 	}
 
-	private static MethodInfo? GetPrepForRemotingMethodInfo()
+	private static MethodInfo GetPrepForRemotingMethodInfo()
 	{
 		try
 		{
@@ -172,7 +194,7 @@ public readonly struct TaskAwaiter : ICriticalNotifyCompletion, INotifyCompletio
 		}
 	}
 
-	private static void RunNoException(Action? continuation)
+	private static void RunNoException(Action continuation)
 	{
 		if (continuation == null)
 		{
@@ -187,23 +209,24 @@ public readonly struct TaskAwaiter : ICriticalNotifyCompletion, INotifyCompletio
 			AsyncMethodBuilderCore.ThrowOnContext(exception, null);
 		}
 	}
-
+	
 	private static void ThrowForNonSuccess(Task task)
 	{
 		switch (task.Status)
 		{
-		case TaskStatus.Canceled:
-			throw new TaskCanceledException(task);
-		case TaskStatus.Faulted:
-			throw PrepareExceptionForRethrow(task.Exception.InnerException);
-		case TaskStatus.WaitingForActivation:
-			return;
-		case TaskStatus.WaitingToRun:
-			return;
-		case TaskStatus.WaitingForChildrenToComplete:
-			return;
-		default:
-			throw new InvalidOperationException("The task has not yet completed.");
+			case TaskStatus.Canceled:
+				throw new TaskCanceledException(task);
+			case TaskStatus.Faulted:
+				//throw PrepareExceptionForRethrow(task.Exception.InnerException); // DIA-DEBUG-TESTING
+				throw PrepareExceptionForRethrow(task.Exception.InnerException); // DIA-DEBUG-TESTING
+			case TaskStatus.WaitingForActivation:
+				return;
+			case TaskStatus.WaitingToRun:
+				return;
+			case TaskStatus.WaitingForChildrenToComplete:
+				return;
+			default:
+				throw new InvalidOperationException("The task has not yet completed.");
 		}
 	}
 }

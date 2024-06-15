@@ -8,7 +8,7 @@ namespace Theraot.Threading.Needles;
 [DebuggerNonUserCode]
 public sealed class WeakDelegateNeedle : WeakNeedle<Delegate>, IEquatable<Delegate>, IEquatable<WeakDelegateNeedle>
 {
-	public MethodInfo? Method
+	public MethodInfo Method
 	{
 		get
 		{
@@ -26,18 +26,18 @@ public sealed class WeakDelegateNeedle : WeakNeedle<Delegate>, IEquatable<Delega
 	{
 	}
 
-	public bool Equals(Delegate? other)
+	public bool Equals(Delegate other)
 	{
 		return (object)other != null && Equals(RuntimeReflectionExtensions.GetMethodInfo(other), other.Target);
 	}
 
-	public bool Equals(MethodInfo? method, object? target)
+	public bool Equals(MethodInfo method, object target)
 	{
 		Delegate value;
 		return TryGetValue(out value) && value.DelegateEquals(method, target);
 	}
 
-	public bool Equals(WeakDelegateNeedle? other)
+	public bool Equals(WeakDelegateNeedle other)
 	{
 		if ((object)other == null)
 		{
@@ -59,7 +59,7 @@ public sealed class WeakDelegateNeedle : WeakNeedle<Delegate>, IEquatable<Delega
 		return EqualityComparer<MethodInfo>.Default.Equals(RuntimeReflectionExtensions.GetMethodInfo(value), methodInfo) && value.Target != value2.Target;
 	}
 
-	public override bool Equals(object? obj)
+	public override bool Equals(object obj)
 	{
 		if (!(obj is WeakDelegateNeedle other))
 		{
@@ -75,7 +75,7 @@ public sealed class WeakDelegateNeedle : WeakNeedle<Delegate>, IEquatable<Delega
 			{
 				return Equals(target);
 			}
-			return !base.IsAlive;
+			return !IsAlive;
 		}
 		return Equals(other);
 	}
@@ -100,7 +100,7 @@ public sealed class WeakDelegateNeedle : WeakNeedle<Delegate>, IEquatable<Delega
 		return true;
 	}
 
-	public bool TryInvoke(object[] args, out object? result)
+	public bool TryInvoke(object[] args, out object result)
 	{
 		if (TryGetValue(out var value))
 		{

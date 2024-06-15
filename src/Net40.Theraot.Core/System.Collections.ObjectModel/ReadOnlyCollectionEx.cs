@@ -30,7 +30,7 @@ public class ReadOnlyCollectionEx<T> : ReadOnlyCollection<T>, IReadOnlyList<T>
 	[MethodImpl(MethodImplOptionsEx.AggressiveInlining)]
 	public void CopyTo(int sourceIndex, T[] array, int index, int count)
 	{
-		Extensions.CanCopyTo(base.Count - sourceIndex, array, count);
+		Extensions.CanCopyTo(Count - sourceIndex, array, count);
 		Extensions.CopyTo(this, sourceIndex, array, index, count);
 	}
 

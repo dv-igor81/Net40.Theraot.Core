@@ -8,13 +8,13 @@ public abstract class FormattableString : IFormattable
 
 	public abstract int ArgumentCount { get; }
 
-	public abstract object?[] GetArguments();
+	public abstract object[] GetArguments();
 
-	public abstract object? GetArgument(int index);
+	public abstract object GetArgument(int index);
 
-	public abstract string ToString(IFormatProvider? formatProvider);
+	public abstract string ToString(IFormatProvider formatProvider);
 
-	string IFormattable.ToString(string? ignored, IFormatProvider? formatProvider)
+	string IFormattable.ToString(string ignored, IFormatProvider formatProvider)
 	{
 		return ToString(formatProvider);
 	}

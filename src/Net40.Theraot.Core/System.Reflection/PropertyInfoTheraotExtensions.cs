@@ -15,7 +15,7 @@ public static class PropertyInfoTheraotExtensions
 	}
 
 	[MethodImpl(MethodImplOptionsEx.AggressiveInlining)]
-	public static void SetValue(this PropertyInfo info, object? obj, object? value)
+	public static void SetValue(this PropertyInfo info, object obj, object value)
 	{
 		if (info == null)
 		{

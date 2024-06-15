@@ -56,7 +56,7 @@ public sealed class Bucket<T> : IBucket<T>, IEnumerable<T>, IEnumerable
 	{
 		object found = BucketHelper.Null;
 		previous = default(T);
-		if (_bucketCore.DoMayIncrement(index, delegate(ref object? target)
+		if (_bucketCore.DoMayIncrement(index, delegate(ref object target)
 		{
 			T val = item;
 			found = Interlocked.Exchange(ref target, (val != null) ? ((object)val) : BucketHelper.Null);
@@ -88,7 +88,7 @@ public sealed class Bucket<T> : IBucket<T>, IEnumerable<T>, IEnumerable
 
 	public bool Insert(int index, T item)
 	{
-		bool flag = _bucketCore.DoMayIncrement(index, delegate(ref object? target)
+		bool flag = _bucketCore.DoMayIncrement(index, delegate(ref object target)
 		{
 			T val = item;
 			object obj = Interlocked.CompareExchange(ref target, (val != null) ? ((object)val) : BucketHelper.Null, null);
@@ -105,7 +105,7 @@ public sealed class Bucket<T> : IBucket<T>, IEnumerable<T>, IEnumerable
 	{
 		object found = BucketHelper.Null;
 		previous = default(T);
-		if (_bucketCore.DoMayIncrement(index, delegate(ref object? target)
+		if (_bucketCore.DoMayIncrement(index, delegate(ref object target)
 		{
 			T val = item;
 			found = Interlocked.CompareExchange(ref target, (val != null) ? ((object)val) : BucketHelper.Null, null);
@@ -124,7 +124,7 @@ public sealed class Bucket<T> : IBucket<T>, IEnumerable<T>, IEnumerable
 
 	public bool RemoveAt(int index)
 	{
-		bool flag = _bucketCore.DoMayDecrement(index, delegate(ref object? target)
+		bool flag = _bucketCore.DoMayDecrement(index, delegate(ref object target)
 		{
 			return Interlocked.Exchange(ref target, null) != null;
 		});
@@ -139,7 +139,7 @@ public sealed class Bucket<T> : IBucket<T>, IEnumerable<T>, IEnumerable
 	{
 		object found = BucketHelper.Null;
 		previous = default(T);
-		if (!_bucketCore.DoMayDecrement(index, delegate(ref object? target)
+		if (!_bucketCore.DoMayDecrement(index, delegate(ref object target)
 		{
 			found = Interlocked.Exchange(ref target, null);
 			return found != null;
@@ -161,7 +161,7 @@ public sealed class Bucket<T> : IBucket<T>, IEnumerable<T>, IEnumerable
 		{
 			throw new ArgumentNullException("check");
 		}
-		return _bucketCore.DoMayDecrement(index, delegate(ref object? target)
+		return _bucketCore.DoMayDecrement(index, delegate(ref object target)
 		{
 			object obj = Interlocked.CompareExchange(ref target, null, null);
 			if (obj == null)
@@ -185,7 +185,7 @@ public sealed class Bucket<T> : IBucket<T>, IEnumerable<T>, IEnumerable
 
 	public void Set(int index, T item, out bool isNew)
 	{
-		isNew = _bucketCore.DoMayIncrement(index, delegate(ref object? target)
+		isNew = _bucketCore.DoMayIncrement(index, delegate(ref object target)
 		{
 			T val = item;
 			return Interlocked.Exchange(ref target, (val != null) ? ((object)val) : BucketHelper.Null) == null;
@@ -200,7 +200,7 @@ public sealed class Bucket<T> : IBucket<T>, IEnumerable<T>, IEnumerable
 	{
 		object found = BucketHelper.Null;
 		value = default(T);
-		if (!_bucketCore.Do(index, delegate(ref object? target)
+		if (!_bucketCore.Do(index, delegate(ref object target)
 		{
 			found = Interlocked.CompareExchange(ref target, null, null);
 			return true;
@@ -228,7 +228,7 @@ public sealed class Bucket<T> : IBucket<T>, IEnumerable<T>, IEnumerable
 		object found = BucketHelper.Null;
 		object compare = BucketHelper.Null;
 		bool result = false;
-		if (!_bucketCore.Do(index, delegate(ref object? target)
+		if (!_bucketCore.Do(index, delegate(ref object target)
 		{
 			found = Interlocked.CompareExchange(ref target, null, null);
 			if (found == null)

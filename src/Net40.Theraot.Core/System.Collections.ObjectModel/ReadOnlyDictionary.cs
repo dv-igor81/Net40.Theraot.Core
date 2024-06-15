@@ -157,7 +157,7 @@ public class ReadOnlyDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IColl
 
 	public TValue this[TKey key] => Dictionary[key];
 
-	object? IDictionary.this[object key]
+	object IDictionary.this[object key]
 	{
 		get
 		{

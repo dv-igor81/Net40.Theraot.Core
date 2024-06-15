@@ -13,7 +13,7 @@
         <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
         <FileAlignment>512</FileAlignment>
         <LangVersion>11</LangVersion>
-        <Nullable>enable</Nullable>
+        <Nullable>disable</Nullable>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
@@ -111,6 +111,7 @@
         <Compile Include="System.Threading.Tasks\ValueTask.cs" />
         <Compile Include="System.Threading.Tasks\ValueTaskEx.cs" />
         <Compile Include="System.Threading\CancellationTokenSourceTheraotExtensions.cs" />
+        <Compile Include="System.Threading\IThreadPoolWorkItemEx.cs" />
         <Compile Include="System.Threading\SemaphoreSlimTheraotExtensions.cs" />
         <Compile Include="System.Threading\ThreadEx.cs" />
         <Compile Include="System.Threading\ThreadPoolEx.cs" />

@@ -6,24 +6,24 @@ public static class FormattableStringFactory
 	{
 		private readonly string _format;
 
-		private readonly object?[] _arguments;
+		private readonly object[] _arguments;
 
 		public override string Format => _format;
 
 		public override int ArgumentCount => _arguments.Length;
 
-		internal ConcreteFormattableString(string format, object?[] arguments)
+		internal ConcreteFormattableString(string format, object[] arguments)
 		{
 			_format = format;
 			_arguments = arguments;
 		}
 
-		public override object?[] GetArguments()
+		public override object[] GetArguments()
 		{
 			return _arguments;
 		}
 
-		public override object? GetArgument(int index)
+		public override object GetArgument(int index)
 		{
 			return _arguments[index];
 		}
@@ -34,7 +34,7 @@ public static class FormattableStringFactory
 		}
 	}
 
-	public static FormattableString Create(string format, params object?[] arguments)
+	public static FormattableString Create(string format, params object[] arguments)
 	{
 		if (format == null)
 		{

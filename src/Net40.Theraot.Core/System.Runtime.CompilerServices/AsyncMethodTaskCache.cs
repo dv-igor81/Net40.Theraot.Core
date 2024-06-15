@@ -21,9 +21,9 @@ internal static class AsyncMethodTaskCache
 
 	private sealed class CacheBool : CacheGeneric<bool>
 	{
-		private readonly TaskCompletionSource<bool> _false = CacheGeneric<bool>.FromResultStatic(result: false);
+		private readonly TaskCompletionSource<bool> _false = FromResultStatic(result: false);
 
-		private readonly TaskCompletionSource<bool> _true = CacheGeneric<bool>.FromResultStatic(result: true);
+		private readonly TaskCompletionSource<bool> _true = FromResultStatic(result: true);
 
 		public override TaskCompletionSource<bool> FromResult(bool result)
 		{
@@ -55,7 +55,7 @@ internal static class AsyncMethodTaskCache
 		{
 			if (result < -1 || result >= 9)
 			{
-				return CacheGeneric<int>.FromResultStatic(result);
+				return FromResultStatic(result);
 			}
 			return _int32Tasks[result - -1];
 		}
@@ -65,7 +65,7 @@ internal static class AsyncMethodTaskCache
 			TaskCompletionSource<int>[] array = new TaskCompletionSource<int>[10];
 			for (int i = 0; i < array.Length; i++)
 			{
-				array[i] = CacheGeneric<int>.FromResultStatic(i - 1);
+				array[i] = FromResultStatic(i - 1);
 			}
 			return array;
 		}

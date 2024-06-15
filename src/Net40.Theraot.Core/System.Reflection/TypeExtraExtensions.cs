@@ -89,7 +89,7 @@ public static class TypeExtraExtensions
 	}
 
 	[MethodImpl(MethodImplOptionsEx.AggressiveInlining)]
-	public static bool DelegateEquals(this Delegate @delegate, MethodInfo? method, object? target)
+	public static bool DelegateEquals(this Delegate @delegate, MethodInfo? method, object target)
 	{
 		if ((object)@delegate == null)
 		{
@@ -478,7 +478,7 @@ public static class TypeExtraExtensions
 		return type == typeof(ushort) || type == typeof(uint) || type == typeof(ulong);
 	}
 
-	private static bool DelegateEqualsExtracted(MethodInfo? delegateMethodInfo, object? delegateTarget, MethodInfo? method, object? target)
+	private static bool DelegateEqualsExtracted(MethodInfo? delegateMethodInfo, object delegateTarget, MethodInfo? method, object target)
 	{
 		return EqualityComparer<MethodInfo>.Default.Equals(method, delegateMethodInfo) && delegateTarget == target;
 	}

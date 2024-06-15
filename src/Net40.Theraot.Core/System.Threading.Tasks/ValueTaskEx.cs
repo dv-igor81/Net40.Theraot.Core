@@ -1,6 +1,9 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace System.Threading.Tasks;
+﻿// Theraot.Core, Version=3.2.11.0, Culture=neutral, PublicKeyToken=b1460dff8a28f7a7
+// System.Threading.Tasks.ValueTaskEx
+using System;
+using System.Runtime.CompilerServices;
+using System.Threading;
+using System.Threading.Tasks;
 
 public static class ValueTaskEx
 {
@@ -32,12 +35,6 @@ public static class ValueTaskEx
     public static ValueTask<TResult> FromResult<TResult>(TResult result)
     {
         return new ValueTask<TResult>(result);
-    }
-    
-    [MethodImpl(MethodImplOptionsEx.AggressiveInlining)]
-    public static ValueTask<TResult> FromTask<TResult>(Task<TResult> task)
-    {
-        return new ValueTask<TResult>(task);
     }
     
     public static ValueTask CompletedTask => new(ValueTask.CompletedTask);

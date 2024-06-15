@@ -12,7 +12,7 @@ public class HashSetEx<T> : HashSet<T>, IReadOnlySet<T>, IReadOnlyCollection<T>,
 {
 	private sealed class SpyEqualityComparer : IEqualityComparer<T>
 	{
-		private readonly ThreadLocal<Action<T, T>?> _callback = new ThreadLocal<Action<T, T>>();
+		private readonly ThreadLocal<Action<T, T>> _callback = new ThreadLocal<Action<T, T>>();
 
 		private readonly IEqualityComparer<T> _wrapped;
 
@@ -87,7 +87,7 @@ public class HashSetEx<T> : HashSet<T>, IReadOnlySet<T>, IReadOnlyCollection<T>,
 
 	public new bool TryGetValue(T equalValue, [MaybeNullWhen(false)] out T actualValue)
 	{
-		SpyEqualityComparer spyEqualityComparer = base.Comparer as SpyEqualityComparer;
+		SpyEqualityComparer spyEqualityComparer = Comparer as SpyEqualityComparer;
 		T found = equalValue;
 		spyEqualityComparer.SetCallback(delegate(T stored, T check)
 		{

@@ -11,7 +11,7 @@ public struct AsyncVoidMethodBuilder : IAsyncMethodBuilder
 
 	private readonly SynchronizationContext _synchronizationContext;
 
-	private System.Runtime.CompilerServices.AsyncMethodBuilderCore _coreState;
+	private AsyncMethodBuilderCore _coreState;
 
 	static AsyncVoidMethodBuilder()
 	{
@@ -22,7 +22,7 @@ public struct AsyncVoidMethodBuilder : IAsyncMethodBuilder
 	{
 		_synchronizationContext = synchronizationContext;
 		synchronizationContext?.OperationStarted();
-		_coreState = default(System.Runtime.CompilerServices.AsyncMethodBuilderCore);
+		_coreState = default(AsyncMethodBuilderCore);
 	}
 
 	public static AsyncVoidMethodBuilder Create()
@@ -39,7 +39,7 @@ public struct AsyncVoidMethodBuilder : IAsyncMethodBuilder
 		}
 		catch (Exception exception)
 		{
-			System.Runtime.CompilerServices.AsyncMethodBuilderCore.ThrowOnContext(exception, null);
+			AsyncMethodBuilderCore.ThrowOnContext(exception, null);
 		}
 	}
 
@@ -53,7 +53,7 @@ public struct AsyncVoidMethodBuilder : IAsyncMethodBuilder
 		}
 		catch (Exception exception)
 		{
-			System.Runtime.CompilerServices.AsyncMethodBuilderCore.ThrowOnContext(exception, null);
+			AsyncMethodBuilderCore.ThrowOnContext(exception, null);
 		}
 	}
 
@@ -71,7 +71,7 @@ public struct AsyncVoidMethodBuilder : IAsyncMethodBuilder
 		{
 			try
 			{
-				System.Runtime.CompilerServices.AsyncMethodBuilderCore.ThrowOnContext(exception, _synchronizationContext);
+				AsyncMethodBuilderCore.ThrowOnContext(exception, _synchronizationContext);
 				return;
 			}
 			finally
@@ -79,7 +79,7 @@ public struct AsyncVoidMethodBuilder : IAsyncMethodBuilder
 				NotifySynchronizationContextOfCompletion();
 			}
 		}
-		System.Runtime.CompilerServices.AsyncMethodBuilderCore.ThrowOnContext(exception, null);
+		AsyncMethodBuilderCore.ThrowOnContext(exception, null);
 	}
 
 	public readonly void SetResult()
@@ -98,7 +98,7 @@ public struct AsyncVoidMethodBuilder : IAsyncMethodBuilder
 	[DebuggerStepThrough]
 	public readonly void Start<TStateMachine>(ref TStateMachine stateMachine) where TStateMachine : IAsyncStateMachine
 	{
-		System.Runtime.CompilerServices.AsyncMethodBuilderCore.Start(ref stateMachine);
+		AsyncMethodBuilderCore.Start(ref stateMachine);
 	}
 
 	internal static void PreventUnobservedTaskExceptions()
@@ -126,7 +126,7 @@ public struct AsyncVoidMethodBuilder : IAsyncMethodBuilder
 		}
 		catch (Exception exception)
 		{
-			System.Runtime.CompilerServices.AsyncMethodBuilderCore.ThrowOnContext(exception, null);
+			AsyncMethodBuilderCore.ThrowOnContext(exception, null);
 		}
 	}
 }

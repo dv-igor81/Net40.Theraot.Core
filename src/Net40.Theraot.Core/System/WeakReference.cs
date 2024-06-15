@@ -13,12 +13,12 @@ public sealed class WeakReference<T> : ISerializable where T : class
 	[NonSerialized]
 	private GCHandle _handle;
 
-	public WeakReference(T? target)
+	public WeakReference(T target)
 		: this(target, trackResurrection: false)
 	{
 	}
 
-	public WeakReference(T? target, bool trackResurrection)
+	public WeakReference(T target, bool trackResurrection)
 	{
 		_trackResurrection = trackResurrection;
 		SetTarget(target);
@@ -48,7 +48,7 @@ public sealed class WeakReference<T> : ISerializable where T : class
 	}
 
 	[SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
-	public void SetTarget(T? value)
+	public void SetTarget(T value)
 	{
 		GCHandle handle = _handle;
 		_handle = GetNewHandle(value, _trackResurrection);
@@ -67,7 +67,7 @@ public sealed class WeakReference<T> : ISerializable where T : class
 	}
 
 	[SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
-	public bool TryGetTarget([NotNullWhen(true)] out T? target)
+	public bool TryGetTarget([NotNullWhen(true)] out T target)
 	{
 		target = null;
 		if (!_handle.IsAllocated)
@@ -91,7 +91,7 @@ public sealed class WeakReference<T> : ISerializable where T : class
 	}
 
 	[SecurityPermission(SecurityAction.Demand, UnmanagedCode = true)]
-	private static GCHandle GetNewHandle(T? value, bool trackResurrection)
+	private static GCHandle GetNewHandle(T value, bool trackResurrection)
 	{
 		return GCHandle.Alloc(value, trackResurrection ? GCHandleType.WeakTrackResurrection : GCHandleType.Weak);
 	}

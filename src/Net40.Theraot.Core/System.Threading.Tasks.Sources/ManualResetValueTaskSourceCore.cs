@@ -8,15 +8,15 @@ namespace System.Threading.Tasks.Sources;
 [StructLayout(LayoutKind.Auto)]
 public struct ManualResetValueTaskSourceCore<TResult>
 {
-	private Action<object?>? _continuation;
+	private Action<object> _continuation;
 
-	private object? _continuationState;
+	private object _continuationState;
 
-	private ExecutionContext? _executionContext;
+	private ExecutionContext _executionContext;
 
-	private object? _capturedContext;
+	private object _capturedContext;
 
-	private INeedle<TResult>? _result;
+	private INeedle<TResult> _result;
 
 	public bool RunContinuationsAsynchronously { get; set; }
 
@@ -68,7 +68,7 @@ public struct ManualResetValueTaskSourceCore<TResult>
 		return _result.Value;
 	}
 
-	public void OnCompleted(Action<object?> continuation, object? state, short token, ValueTaskSourceOnCompletedFlags flags)
+	public void OnCompleted(Action<object> continuation, object state, short token, ValueTaskSourceOnCompletedFlags flags)
 	{
 		if (continuation == null)
 		{
@@ -209,9 +209,9 @@ public struct ManualResetValueTaskSourceCore<TResult>
 }
 internal static class ManualResetValueTaskSourceCore
 {
-	internal static readonly Action<object?> Sentinel = CompletionSentinel;
+	internal static readonly Action<object> Sentinel = CompletionSentinel;
 
-	private static void CompletionSentinel(object? _)
+	private static void CompletionSentinel(object _)
 	{
 		DebugEx.Fail("The sentinel delegate should never be invoked.");
 		throw new InvalidOperationException();

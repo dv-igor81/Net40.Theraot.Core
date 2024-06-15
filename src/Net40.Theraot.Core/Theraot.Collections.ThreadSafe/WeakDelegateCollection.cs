@@ -9,13 +9,13 @@ namespace Theraot.Collections.ThreadSafe;
 [DebuggerNonUserCode]
 public sealed class WeakDelegateCollection : WeakCollection<Delegate, WeakDelegateNeedle>
 {
-	private readonly Action<object?[]> _invoke;
+	private readonly Action<object[]> _invoke;
 
-	private readonly Action<object?[]> _invokeAndClear;
+	private readonly Action<object[]> _invokeAndClear;
 
-	private readonly Action<Action<Exception>, object?[]> _invokeAndClearWithException;
+	private readonly Action<Action<Exception>, object[]> _invokeAndClearWithException;
 
-	private readonly Action<Action<Exception>, object?[]> _invokeWithException;
+	private readonly Action<Action<Exception>, object[]> _invokeWithException;
 
 	public WeakDelegateCollection(bool autoRemoveDeadItems, bool freeReentry)
 		: base(autoRemoveDeadItems)
@@ -29,28 +29,28 @@ public sealed class WeakDelegateCollection : WeakCollection<Delegate, WeakDelega
 			return;
 		}
 		ReentryGuard guard = new ReentryGuard();
-		_invoke = delegate(object?[] input)
+		_invoke = delegate(object[] input)
 		{
 			guard.Execute(delegate
 			{
 				InvokeExtracted(input);
 			});
 		};
-		_invokeAndClear = delegate(object?[] input)
+		_invokeAndClear = delegate(object[] input)
 		{
 			guard.Execute(delegate
 			{
 				InvokeAndClearExtracted(input);
 			});
 		};
-		_invokeWithException = delegate(Action<Exception> onException, object?[] input)
+		_invokeWithException = delegate(Action<Exception> onException, object[] input)
 		{
 			guard.Execute(delegate
 			{
 				InvokeExtracted(onException, input);
 			});
 		};
-		_invokeAndClearWithException = delegate(Action<Exception> onException, object?[] input)
+		_invokeAndClearWithException = delegate(Action<Exception> onException, object[] input)
 		{
 			guard.Execute(delegate
 			{
@@ -59,7 +59,7 @@ public sealed class WeakDelegateCollection : WeakCollection<Delegate, WeakDelega
 		};
 	}
 
-	public void Invoke(Action<Exception> onException, DelegateCollectionInvokeOptions options, params object?[] args)
+	public void Invoke(Action<Exception> onException, DelegateCollectionInvokeOptions options, params object[] args)
 	{
 		if ((options & DelegateCollectionInvokeOptions.RemoveDelegates) != 0)
 		{
@@ -71,7 +71,7 @@ public sealed class WeakDelegateCollection : WeakCollection<Delegate, WeakDelega
 		}
 	}
 
-	public void Invoke(DelegateCollectionInvokeOptions options, params object?[] args)
+	public void Invoke(DelegateCollectionInvokeOptions options, params object[] args)
 	{
 		if ((options & DelegateCollectionInvokeOptions.RemoveDelegates) != 0)
 		{
@@ -83,7 +83,7 @@ public sealed class WeakDelegateCollection : WeakCollection<Delegate, WeakDelega
 		}
 	}
 
-	private void InvokeAndClearExtracted(Action<Exception> onException, object?[] args)
+	private void InvokeAndClearExtracted(Action<Exception> onException, object[] args)
 	{
 		foreach (Delegate item in ClearEnumerable())
 		{
@@ -98,7 +98,7 @@ public sealed class WeakDelegateCollection : WeakCollection<Delegate, WeakDelega
 		}
 	}
 
-	private void InvokeAndClearExtracted(object?[] args)
+	private void InvokeAndClearExtracted(object[] args)
 	{
 		foreach (Delegate item in ClearEnumerable())
 		{
@@ -106,7 +106,7 @@ public sealed class WeakDelegateCollection : WeakCollection<Delegate, WeakDelega
 		}
 	}
 
-	private void InvokeExtracted(Action<Exception> onException, object?[] args)
+	private void InvokeExtracted(Action<Exception> onException, object[] args)
 	{
 		using IEnumerator<Delegate> enumerator = GetEnumerator();
 		while (enumerator.MoveNext())
@@ -123,7 +123,7 @@ public sealed class WeakDelegateCollection : WeakCollection<Delegate, WeakDelega
 		}
 	}
 
-	private void InvokeExtracted(object?[] args)
+	private void InvokeExtracted(object[] args)
 	{
 		using IEnumerator<Delegate> enumerator = GetEnumerator();
 		while (enumerator.MoveNext())

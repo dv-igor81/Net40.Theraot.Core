@@ -16,5 +16,15 @@ namespace Net40.AsyncStreamDemo.WPF
             }
             return await TaskEx.Run(reader.ReadLine);
         }
+        
+        [MethodImpl(MethodImplOptionsEx.AggressiveInlining)]
+        public static Task<string> ReadLineAsync2(this StreamReader reader)
+        {
+            if (reader == null)
+            {
+                throw new NullReferenceException();
+            }
+            return TaskEx.Run(reader.ReadLine);
+        }
     }
 }

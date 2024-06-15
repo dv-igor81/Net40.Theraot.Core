@@ -1,52 +1,67 @@
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 namespace System.Collections.Generic;
 
 public static class CollectionExtensions
 {
-	[return: MaybeNull]
-	public static TValue GetValueOrDefault<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary, TKey key) where TKey : notnull
-	{
-		return dictionary.GetValueOrDefault(key, default(TValue));
-	}
+    [MethodImpl(MethodImplOptionsEx.AggressiveInlining)]
+    [return: MaybeNull]
+    public static TValue GetValueOrDefault<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary, TKey key)
+    {
+            if (dictionary == null)
+            {
+                throw new ArgumentNullException(nameof(dictionary));
+            }
 
-	[return: MaybeNull]
-	public static TValue GetValueOrDefault<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary, TKey key, [AllowNull] TValue defaultValue) where TKey : notnull
-	{
-		if (dictionary == null)
-		{
-			throw new ArgumentNullException("dictionary");
-		}
-		TValue value;
-		return dictionary.TryGetValue(key, out value) ? value : defaultValue;
-	}
+            return dictionary.TryGetValue(key, out var value) ? value : default;
+        }
 
-	public static bool TryAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue value) where TKey : notnull
-	{
-		if (dictionary == null)
-		{
-			throw new ArgumentNullException("dictionary");
-		}
-		if (!dictionary.ContainsKey(key))
-		{
-			dictionary.Add(key, value);
-			return true;
-		}
-		return false;
-	}
+    [MethodImpl(MethodImplOptionsEx.AggressiveInlining)]
+    public static TValue GetValueOrDefault<TKey, TValue>(this IReadOnlyDictionary<TKey, TValue> dictionary, TKey key, TValue defaultValue)
+    {
+            if (dictionary == null)
+            {
+                throw new ArgumentNullException(nameof(dictionary));
+            }
 
-	public static bool Remove<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, [MaybeNullWhen(false)] out TValue value) where TKey : notnull
-	{
-		if (dictionary == null)
-		{
-			throw new ArgumentNullException("dictionary");
-		}
-		if (dictionary.TryGetValue(key, out value))
-		{
-			dictionary.Remove(key);
-			return true;
-		}
-		value = default(TValue);
-		return false;
-	}
+            return dictionary.TryGetValue(key, out var value) ? value : defaultValue;
+        }
+
+    [MethodImpl(MethodImplOptionsEx.AggressiveInlining)]
+    public static bool Remove<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, [MaybeNullWhen(false)] out TValue value)
+    {
+            if (dictionary == null)
+            {
+                throw new ArgumentNullException(nameof(dictionary));
+            }
+
+            if (dictionary.TryGetValue(key, out value) && dictionary.Remove(key))
+            {
+                return true;
+            }
+
+            value = default;
+            return false;
+        }
+
+    [MethodImpl(MethodImplOptionsEx.AggressiveInlining)]
+    public static bool TryAdd<TKey, TValue>(this IDictionary<TKey, TValue> dictionary, TKey key, TValue value)
+    {
+            if (dictionary == null)
+            {
+                throw new ArgumentNullException(nameof(dictionary));
+            }
+
+            try
+            {
+                dictionary.Add(key, value);
+                return true;
+            }
+            catch (ArgumentException ex)
+            {
+                _ = ex;
+                return false;
+            }
+        }
 }
